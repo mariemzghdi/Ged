@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.3</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.soasy</groupId>
+	<artifactId>ged</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>ged</name>
+	<description>GED</description>
+	<properties>
+		<java.version>17</java.version>
+		<spring-cloud.version>2023.0.0</spring-cloud.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.2.15</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.2.15</version>
+		</dependency>
+
+
+	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
+					</image>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.3.0</version> <!-- important for Spring Boot 3.x -->
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<id>buildApi</id>
+						<configuration>
+							<!-- path to the specification file Swagger -->
+							<inputSpec>C:\ged\src\main\resources\sawgger\auth_api_alfresco.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<library>spring-cloud</library>
+							<generateApis>true</generateApis>
+							<generateModels>true</generateModels>
+							<configOptions>
+								<useBeanValidation>true</useBeanValidation>
+								<performBeanValidation>true</performBeanValidation>
+								<modelPackage>com.soasy.ged.model</modelPackage>
+								<apiPackage>com.soasy.ged.api</apiPackage>
+								<sourceFolder>/src/main/java</sourceFolder>
+								<implFolder>/src/main/java</implFolder>
+								<serializableModel>true</serializableModel>
+								<useJakartaEe>true</useJakartaEe> <!-- important for Spring Boot 3.x -->
+								<useSpringBoot3>true</useSpringBoot3> <!-- important for Spring Boot 3.x -->
+								<generateForOpenFeign>true</generateForOpenFeign><!-- important for openFeign -->
+								<typeMappings>
+									<typeMapping>date=LocalDate</typeMapping>
+									<typeMapping>date-time=LocalDateTime</typeMapping>
+								</typeMappings>
+								<importMappings>
+									<importMapping>LocalDate=java.time.LocalDate</importMapping>
+									<importMapping>LocalDateTime=java.time.LocalDateTime</importMapping>
+								</importMappings>
+							</configOptions>
+						</configuration>
+					</execution>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<id>buildApi1</id>
+						<configuration>
+							<!-- path to the specification file Swagger -->
+							<inputSpec>C:\ged\src\main\resources\sawgger\core_api_alfresco.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<library>spring-cloud</library>
+							<generateApis>true</generateApis>
+							<generateModels>true</generateModels>
+							<configOptions>
+								<useBeanValidation>true</useBeanValidation>
+								<performBeanValidation>true</performBeanValidation>
+								<modelPackage>com.soasy.ged.model</modelPackage>
+								<apiPackage>com.soasy.ged.api</apiPackage>
+								<sourceFolder>/src/main/java</sourceFolder>
+								<implFolder>/src/main/java</implFolder>
+								<serializableModel>true</serializableModel>
+								<useJakartaEe>true</useJakartaEe> <!-- important for Spring Boot 3.x -->
+								<useSpringBoot3>true</useSpringBoot3> <!-- important for Spring Boot 3.x -->
+								<generateForOpenFeign>true</generateForOpenFeign><!-- important for openFeign -->
+								<typeMappings>
+									<typeMapping>date=LocalDate</typeMapping>
+									<typeMapping>date-time=LocalDateTime</typeMapping>
+								</typeMappings>
+								<importMappings>
+									<importMapping>LocalDate=java.time.LocalDate</importMapping>
+									<importMapping>LocalDateTime=java.time.LocalDateTime</importMapping>
+								</importMappings>
+							</configOptions>
+						</configuration>
+					</execution>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<id>buildApi2</id>
+						<configuration>
+							<!-- path to the specification file Swagger -->
+							<inputSpec>C:\ged\src\main\resources\sawgger\discovery_api_alfresco.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<library>spring-cloud</library>
+							<generateApis>true</generateApis>
+							<generateModels>true</generateModels>
+							<configOptions>
+								<useBeanValidation>true</useBeanValidation>
+								<performBeanValidation>true</performBeanValidation>
+								<modelPackage>com.soasy.ged.model</modelPackage>
+								<apiPackage>com.soasy.ged.api</apiPackage>
+								<sourceFolder>/src/main/java</sourceFolder>
+								<implFolder>/src/main/java</implFolder>
+								<serializableModel>true</serializableModel>
+								<useJakartaEe>true</useJakartaEe> <!-- important for Spring Boot 3.x -->
+								<useSpringBoot3>true</useSpringBoot3> <!-- important for Spring Boot 3.x -->
+								<generateForOpenFeign>true</generateForOpenFeign><!-- important for openFeign -->
+								<typeMappings>
+									<typeMapping>date=LocalDate</typeMapping>
+									<typeMapping>date-time=LocalDateTime</typeMapping>
+								</typeMappings>
+								<importMappings>
+									<importMapping>LocalDate=java.time.LocalDate</importMapping>
+									<importMapping>LocalDateTime=java.time.LocalDateTime</importMapping>
+								</importMappings>
+							</configOptions>
+						</configuration>
+					</execution>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<id>buildApi3</id>
+						<configuration>
+							<!-- path to the specification file Swagger -->
+							<inputSpec>C:\ged\src\main\resources\sawgger\model_api_alfresco.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<library>spring-cloud</library>
+							<generateApis>true</generateApis>
+							<generateModels>true</generateModels>
+							<configOptions>
+								<useBeanValidation>true</useBeanValidation>
+								<performBeanValidation>true</performBeanValidation>
+								<modelPackage>com.soasy.ged.model</modelPackage>
+								<apiPackage>com.soasy.ged.api</apiPackage>
+								<sourceFolder>/src/main/java</sourceFolder>
+								<implFolder>/src/main/java</implFolder>
+								<serializableModel>true</serializableModel>
+								<useJakartaEe>true</useJakartaEe> <!-- important for Spring Boot 3.x -->
+								<useSpringBoot3>true</useSpringBoot3> <!-- important for Spring Boot 3.x -->
+								<generateForOpenFeign>true</generateForOpenFeign><!-- important for openFeign -->
+								<typeMappings>
+									<typeMapping>date=LocalDate</typeMapping>
+									<typeMapping>date-time=LocalDateTime</typeMapping>
+								</typeMappings>
+								<importMappings>
+									<importMapping>LocalDate=java.time.LocalDate</importMapping>
+									<importMapping>LocalDateTime=java.time.LocalDateTime</importMapping>
+								</importMappings>
+							</configOptions>
+						</configuration>
+					</execution>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<id>buildApi4</id>
+						<configuration>
+							<!-- path to the specification file Swagger -->
+							<inputSpec>C:\ged\src\main\resources\sawgger\search-sql_api_alfresco.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<library>spring-cloud</library>
+							<generateApis>true</generateApis>
+							<generateModels>true</generateModels>
+							<configOptions>
+								<useBeanValidation>true</useBeanValidation>
+								<performBeanValidation>true</performBeanValidation>
+								<modelPackage>com.soasy.ged.model</modelPackage>
+								<apiPackage>com.soasy.ged.api</apiPackage>
+								<sourceFolder>/src/main/java</sourceFolder>
+								<implFolder>/src/main/java</implFolder>
+								<serializableModel>true</serializableModel>
+								<useJakartaEe>true</useJakartaEe> <!-- important for Spring Boot 3.x -->
+								<useSpringBoot3>true</useSpringBoot3> <!-- important for Spring Boot 3.x -->
+								<generateForOpenFeign>true</generateForOpenFeign><!-- important for openFeign -->
+								<typeMappings>
+									<typeMapping>date=LocalDate</typeMapping>
+									<typeMapping>date-time=LocalDateTime</typeMapping>
+								</typeMappings>
+								<importMappings>
+									<importMapping>LocalDate=java.time.LocalDate</importMapping>
+									<importMapping>LocalDateTime=java.time.LocalDateTime</importMapping>
+								</importMappings>
+							</configOptions>
+						</configuration>
+					</execution>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<id>buildApi5</id>
+						<configuration>
+							<!-- path to the specification file Swagger -->
+							<inputSpec>C:\ged\src\main\resources\sawgger\search_api_alfresco.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<library>spring-cloud</library>
+							<generateApis>true</generateApis>
+							<generateModels>true</generateModels>
+							<configOptions>
+								<useBeanValidation>true</useBeanValidation>
+								<performBeanValidation>true</performBeanValidation>
+								<modelPackage>com.soasy.ged.model</modelPackage>
+								<apiPackage>com.soasy.ged.api</apiPackage>
+								<sourceFolder>/src/main/java</sourceFolder>
+								<implFolder>/src/main/java</implFolder>
+								<serializableModel>true</serializableModel>
+								<useJakartaEe>true</useJakartaEe> <!-- important for Spring Boot 3.x -->
+								<useSpringBoot3>true</useSpringBoot3> <!-- important for Spring Boot 3.x -->
+								<generateForOpenFeign>true</generateForOpenFeign><!-- important for openFeign -->
+								<typeMappings>
+									<typeMapping>date=LocalDate</typeMapping>
+									<typeMapping>date-time=LocalDateTime</typeMapping>
+								</typeMappings>
+								<importMappings>
+									<importMapping>LocalDate=java.time.LocalDate</importMapping>
+									<importMapping>LocalDateTime=java.time.LocalDateTime</importMapping>
+								</importMappings>
+							</configOptions>
+						</configuration>
+					</execution>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<id>buildApi6</id>
+						<configuration>
+							<!-- path to the specification file Swagger -->
+							<inputSpec>C:\ged\src\main\resources\sawgger\workflow_api_alfresco.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<library>spring-cloud</library>
+							<generateApis>true</generateApis>
+							<generateModels>true</generateModels>
+							<configOptions>
+								<useBeanValidation>true</useBeanValidation>
+								<performBeanValidation>true</performBeanValidation>
+								<modelPackage>com.soasy.ged.model</modelPackage>
+								<apiPackage>com.soasy.ged.api</apiPackage>
+								<sourceFolder>/src/main/java</sourceFolder>
+								<implFolder>/src/main/java</implFolder>
+								<serializableModel>true</serializableModel>
+								<useJakartaEe>true</useJakartaEe> <!-- important for Spring Boot 3.x -->
+								<useSpringBoot3>true</useSpringBoot3> <!-- important for Spring Boot 3.x -->
+								<generateForOpenFeign>true</generateForOpenFeign><!-- important for openFeign -->
+								<typeMappings>
+									<typeMapping>date=LocalDate</typeMapping>
+									<typeMapping>date-time=LocalDateTime</typeMapping>
+								</typeMappings>
+								<importMappings>
+									<importMapping>LocalDate=java.time.LocalDate</importMapping>
+									<importMapping>LocalDateTime=java.time.LocalDateTime</importMapping>
+								</importMappings>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+
+
+	</build>
+
+
+</project>
